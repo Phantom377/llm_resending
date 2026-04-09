@@ -1,0 +1,23 @@
+required_sap_fields = ['generic_role', 'employee_sub_group']
+payload = json.dumps({
+    "query": "ESP567E",
+    "searchType": "vector",
+    "vector": {
+        "kind": "vector",
+        "fields": "user_name_vector",
+        "k": 3,
+        "exhaustive": True,
+        "select": "email_address, person_id, full_name, user_name, generic_role, employee_sub_group",
+        "top": 1
+    }
+})
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+if response.status_code != 200:
+    print("error {}".format(response.status_code))
+    print(response.text)
+
+result = response.json()
+search_result = result['value']
+search_result
