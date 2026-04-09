@@ -1,4 +1,3 @@
-required_sap_fields = ['generic_role', 'employee_sub_group']
 payload = json.dumps({
     "query": "ESP567E",
     "searchType": "vector",
@@ -7,7 +6,7 @@ payload = json.dumps({
         "fields": "user_name_vector",
         "k": 3,
         "exhaustive": True,
-        "select": "email_address, person_id, full_name, user_name, generic_role, employee_sub_group",
+        "select": f"user_name, {', '.join(required_sap_fields)}",
         "top": 1
     }
 })
